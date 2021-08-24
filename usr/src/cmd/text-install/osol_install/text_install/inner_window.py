@@ -501,7 +501,9 @@ class InnerWindow(object):
         
         '''
         logging.log(LOG_LEVEL_INPUT, "Got char code %s", input_key)
-        if InnerWindow.BEGIN_ESC:
+        if not input_key:
+            return None
+        elif InnerWindow.BEGIN_ESC:
             logging.log(LOG_LEVEL_INPUT, "Ending esc-sequence")
             InnerWindow.BEGIN_ESC = False
             if curses.ascii.isdigit(input_key):
